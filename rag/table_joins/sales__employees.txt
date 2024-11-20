@@ -1,0 +1,45 @@
+# Sales - Employees Join
+
+## Join Relationship
+**sales.employee_id = employees.id**
+
+## Join Type  
+Many-to-One (Many sales can be made by one employee)
+
+## Join Purpose
+Track individual sales performance and commission calculations for sales representatives.
+
+## Common Join Queries
+```sql
+-- Sales with employee information
+SELECT s.sale_date, s.total_amount, s.commission, s.region, s.sale_type,
+       e.name as sales_rep, e.position, d.name as department
+FROM sales s
+JOIN employees e ON s.employee_id = e.id
+JOIN departments d ON e.department_id = d.id
+
+-- Employee sales performance and commission tracking
+SELECT e.name as sales_rep, COUNT(s.id) as total_sales_count,
+       SUM(s.total_amount) as total_sales_revenue,
+       SUM(s.commission) as total_commission_earned,
+       AVG(s.total_amount) as avg_sale_amount
+FROM employees e
+LEFT JOIN sales s ON e.id = s.employee_id  
+WHERE e.department_id = (SELECT id FROM departments WHERE name = 'Sales')
+GROUP BY e.id, e.name
+
+-- Regional sales performance by employee
+SELECT e.name as sales_rep, s.region, COUNT(s.id) as sales_count,
+       SUM(s.total_amount) as regional_sales, SUM(s.commission) as regional_commission
+FROM employees e
+JOIN sales s ON e.id = s.employee_id
+GROUP BY e.id, e.name, s.region
+ORDER BY regional_sales DESC
+```
+
+## Key Insights Available
+- Individual sales rep performance
+- Commission tracking and payouts
+- Regional sales territory analysis
+- Sales methodology effectiveness (Direct vs Online vs Partner)
+- Employee productivity metrics

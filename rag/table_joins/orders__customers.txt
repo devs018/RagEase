@@ -1,0 +1,43 @@
+# Orders - Customers Join
+
+## Join Relationship
+**orders.customer_id = customers.id**
+
+## Join Type
+Many-to-One (Many orders can belong to one customer)
+
+## Join Purpose
+Link orders to customers for customer behavior analysis and relationship management.
+
+## Common Join Queries
+```sql
+-- Orders with customer information
+SELECT o.id as order_id, o.order_date, o.total_amount, c.name as customer, c.customer_type, c.city
+FROM orders o
+JOIN customers c ON o.customer_id = c.id
+
+-- Customer purchase behavior
+SELECT c.name as customer, c.customer_type, COUNT(o.id) as order_count, 
+       SUM(o.total_amount) as total_spent, AVG(o.total_amount) as avg_order_value
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+GROUP BY c.id, c.name
+
+-- Customer lifetime value analysis
+SELECT c.customer_type, COUNT(DISTINCT c.id) as customer_count, 
+       AVG(customer_stats.total_spent) as avg_lifetime_value
+FROM customers c
+LEFT JOIN (
+    SELECT customer_id, SUM(total_amount) as total_spent 
+    FROM orders 
+    GROUP BY customer_id
+) customer_stats ON c.id = customer_stats.customer_id
+GROUP BY c.customer_type
+```
+
+## Key Insights Available
+- Customer purchase patterns
+- Customer segmentation analysis
+- Geographic order distribution
+- Customer loyalty metrics
+- Revenue by customer type

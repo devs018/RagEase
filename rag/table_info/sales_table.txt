@@ -1,0 +1,30 @@
+# Sales Table
+
+## Table: sales
+
+### Purpose
+Individual sales transaction records for commission tracking and sales performance analysis.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique sale identifier
+- **employee_id** (INTEGER): Foreign key reference to employees.id (sales representative)
+- **customer_id** (INTEGER): Foreign key reference to customers.id
+- **product_id** (INTEGER): Foreign key reference to products.id
+- **sale_date** (DATE): Date of sale transaction
+- **quantity** (INTEGER): Number of units sold
+- **unit_price** (REAL): Price per unit in USD
+- **total_amount** (REAL): Total sale amount
+- **commission** (REAL): Commission earned by sales rep (5% of total_amount)
+- **region** (TEXT): Sales region (North, South, East, West, Central)
+- **sale_type** (TEXT): Type of sale (Direct, Online, Partner, Referral)
+
+### Key Information
+- 100 individual sales transactions
+- Commission structure for sales performance tracking
+- Regional sales distribution
+- Multiple sale types for channel analysis
+- Sales made by dedicated sales employees
+- Historical sales data spanning one year
+
+### Sample Data Count
+100 sales records with complete transaction details and commission calculations.

@@ -1,0 +1,45 @@
+# Sales - Products Join
+
+## Join Relationship
+**sales.product_id = products.id**
+
+## Join Type
+Many-to-One (Many sales can involve one product)
+
+## Join Purpose  
+Analyze product sales performance and profitability at the individual transaction level.
+
+## Common Join Queries
+```sql
+-- Sales with product information
+SELECT s.sale_date, s.quantity, s.total_amount, s.region, s.sale_type,
+       p.name as product, p.category, p.cost_price, p.selling_price,
+       (s.total_amount - (p.cost_price * s.quantity)) as transaction_profit
+FROM sales s
+JOIN products p ON s.product_id = p.id
+
+-- Product sales analysis across all transactions  
+SELECT p.name as product, p.category, COUNT(s.id) as transaction_count,
+       SUM(s.quantity) as total_units_sold, SUM(s.total_amount) as total_revenue,
+       AVG(s.total_amount) as avg_transaction_value
+FROM products p
+LEFT JOIN sales s ON p.id = s.product_id
+GROUP BY p.id, p.name
+
+-- Profitability analysis by product category
+SELECT p.category, COUNT(s.id) as transactions, SUM(s.total_amount) as revenue,
+       SUM(p.cost_price * s.quantity) as total_cost,
+       SUM(s.total_amount - (p.cost_price * s.quantity)) as total_profit,
+       AVG((s.total_amount - (p.cost_price * s.quantity)) / s.total_amount * 100) as avg_profit_margin
+FROM products p
+JOIN sales s ON p.id = s.product_id
+GROUP BY p.category
+ORDER BY total_profit DESC
+```
+
+## Key Insights Available
+- Product-level sales performance
+- Transaction profitability analysis  
+- Category performance comparison
+- Regional product preferences
+- Product pricing effectiveness

@@ -1,0 +1,28 @@
+# Suppliers Table
+
+## Table: suppliers
+
+### Purpose
+Information about external suppliers providing products to the company.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique supplier identifier
+- **name** (TEXT NOT NULL): Supplier company name
+- **contact_person** (TEXT): Primary contact person name
+- **email** (TEXT): Contact email address
+- **phone** (TEXT): Contact phone number
+- **address** (TEXT): Supplier address
+- **city** (TEXT): Supplier city
+- **country** (TEXT): Supplier country (USA, UK, Germany)
+- **rating** (REAL): Supplier performance rating (3.9 to 4.7 scale)
+- **contract_start_date** (DATE): When partnership began
+
+### Key Information
+- 5 international suppliers
+- Mix of technology and electronics suppliers
+- Performance ratings to track supplier quality
+- Global supplier base including USA, UK, and Germany
+- Long-term partnerships established 2019-2021
+
+### Sample Data Count
+5 suppliers providing various technology products.

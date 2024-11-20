@@ -1,0 +1,29 @@
+# Products Table
+
+## Table: products
+
+### Purpose
+Catalog of all products sold by the company including pricing, inventory, and supplier information.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique product identifier
+- **name** (TEXT NOT NULL): Product name
+- **category** (TEXT): Product category (Laptops, Tablets, Smartphones, Audio, Accessories, Monitors)
+- **supplier_id** (INTEGER): Foreign key reference to suppliers.id
+- **cost_price** (REAL): Cost price from supplier in USD
+- **selling_price** (REAL): Retail selling price in USD
+- **stock_quantity** (INTEGER): Current inventory level
+- **min_stock_level** (INTEGER): Minimum stock threshold for reordering
+- **description** (TEXT): Product description
+- **created_date** (DATE): When product was added to catalog
+
+### Key Information
+- 12 different technology products
+- 6 product categories covering major tech segments
+- Pricing ranges from $95 to $2,800
+- Inventory management with min stock levels
+- Products from multiple suppliers
+- Mix of premium and standard products
+
+### Sample Data Count
+12 products across 6 categories with complete pricing and inventory data.

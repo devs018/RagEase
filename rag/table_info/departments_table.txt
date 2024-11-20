@@ -1,0 +1,23 @@
+# Departments Table
+
+## Table: departments
+
+### Purpose
+Stores information about company departments including budget, location, and management structure.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique department identifier
+- **name** (TEXT NOT NULL UNIQUE): Department name (Engineering, Marketing, Sales, HR, Finance, Operations, Customer Service)
+- **manager_id** (INTEGER): Foreign key reference to employees.id for department manager
+- **budget** (REAL): Annual department budget in USD
+- **location** (TEXT): Physical location of department (San Francisco, New York, Chicago, Austin, Boston, Seattle, Denver)
+- **created_date** (DATE): Date when department was established
+
+### Key Information
+- Each department has a unique name
+- Budget ranges from $200,000 to $500,000
+- Manager is an employee from the same or different department
+- Locations are distributed across major US cities
+
+### Sample Data Count
+7 departments total covering all major business functions.

@@ -1,0 +1,44 @@
+# Order Items - Products Join
+
+## Join Relationship  
+**order_items.product_id = products.id**
+
+## Join Type
+Many-to-One (Many order items can reference one product)
+
+## Join Purpose
+Link order line items to product details for detailed sales analysis and inventory tracking.
+
+## Common Join Queries
+```sql
+-- Order items with product details
+SELECT oi.order_id, p.name as product, p.category, oi.quantity, 
+       oi.unit_price, oi.total_price, p.cost_price,
+       (oi.total_price - (p.cost_price * oi.quantity)) as profit
+FROM order_items oi
+JOIN products p ON oi.product_id = p.id
+
+-- Product sales performance analysis
+SELECT p.name as product, p.category, COUNT(oi.id) as times_ordered,
+       SUM(oi.quantity) as total_units_sold, SUM(oi.total_price) as total_revenue
+FROM products p
+LEFT JOIN order_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name
+
+-- Profitability analysis by product
+SELECT p.name as product, p.category,
+       SUM(oi.total_price) as revenue,
+       SUM(p.cost_price * oi.quantity) as cost,
+       SUM(oi.total_price - (p.cost_price * oi.quantity)) as profit,
+       AVG((oi.total_price - (p.cost_price * oi.quantity)) / oi.total_price * 100) as profit_margin_percent
+FROM products p
+JOIN order_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name
+```
+
+## Key Insights Available
+- Product sales performance
+- Profit margin analysis
+- Category performance comparison
+- Inventory turnover tracking  
+- Revenue contribution by product

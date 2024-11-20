@@ -1,0 +1,29 @@
+# Orders Table
+
+## Table: orders
+
+### Purpose
+Tracks customer orders including order details, status, and fulfillment information.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique order identifier
+- **customer_id** (INTEGER): Foreign key reference to customers.id
+- **employee_id** (INTEGER): Foreign key reference to employees.id (sales rep handling order)
+- **order_date** (DATE): When order was placed
+- **ship_date** (DATE): When order was shipped
+- **total_amount** (REAL): Total order value in USD
+- **status** (TEXT): Order status (Pending, Processing, Shipped, Delivered, Cancelled)
+- **payment_method** (TEXT): Payment method used (Credit Card, Bank Transfer, PayPal, Check)
+- **shipping_address** (TEXT): Delivery address
+- **discount_percent** (REAL): Discount percentage applied (0-20%)
+
+### Key Information
+- 50 orders with realistic order patterns
+- Orders handled by sales employees
+- Various order statuses tracking fulfillment pipeline
+- Multiple payment methods accepted
+- Order values range from $500 to $15,000
+- Discount structure for customer incentives
+
+### Sample Data Count
+50 orders spanning the last year with complete order lifecycle data.

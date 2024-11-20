@@ -1,0 +1,25 @@
+# Order Items Table
+
+## Table: order_items
+
+### Purpose
+Detailed breakdown of products included in each order with quantities and pricing.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique order item identifier
+- **order_id** (INTEGER): Foreign key reference to orders.id
+- **product_id** (INTEGER): Foreign key reference to products.id
+- **quantity** (INTEGER): Number of units ordered
+- **unit_price** (REAL): Price per unit in USD
+- **discount** (REAL): Discount amount applied to this line item
+- **total_price** (REAL): Total price for this line item (unit_price - discount) * quantity
+
+### Key Information
+- Multiple items per order (1-5 items per order typically)
+- Quantity ranges from 1-10 units per line item
+- Item-level discounts applied
+- Complete pricing breakdown for detailed analysis
+- Links orders to specific products for inventory tracking
+
+### Sample Data Count
+Multiple order items per order, totaling hundreds of line items across all orders.

@@ -1,0 +1,55 @@
+# Advanced Data Analysis Guidelines
+
+## Statistical Analysis Patterns
+
+### Employee Analysis
+```python
+# Age vs Salary Correlation Analysis
+df_emp = pd.DataFrame(employee_data)
+correlation = df_emp['age'].corr(df_emp['salary'])
+print(f"Age-Salary Correlation: {correlation:.3f}")
+
+# Department salary comparison with statistical tests
+from scipy import stats
+dept_groups = [df_emp[df_emp['department']==dept]['salary'] for dept in df_emp['department'].unique()]
+f_stat, p_value = stats.f_oneway(*dept_groups)
+print(f"ANOVA F-statistic: {f_stat:.3f}, p-value: {p_value:.3f}")
+
+# Salary distribution analysis
+df_emp['salary'].describe()
+```
+
+### Sales Analysis
+```python
+# Sales trend analysis
+df_sales['sale_date'] = pd.to_datetime(df_sales['sale_date'])
+monthly_sales = df_sales.groupby(df_sales['sale_date'].dt.to_period('M'))['amount'].agg(['count', 'sum', 'mean'])
+
+# Regional performance metrics
+regional_stats = df_sales.groupby('region')['amount'].agg(['count', 'sum', 'mean', 'std'])
+
+# Product performance analysis
+product_performance = df_sales.groupby('product').agg({
+    'amount': ['count', 'sum', 'mean'],
+    'employee_id': 'nunique'
+}).round(2)
+```
+
+## Visualization Recommendations
+
+### Employee Visualizations
+- Salary distribution by department (box plot)
+- Age vs Salary scatter plot with regression line
+- Department size pie chart
+- Hiring timeline (bar chart by year/month)
+
+### Sales Visualizations  
+- Monthly sales trend (line chart)
+- Regional sales comparison (bar chart)
+- Product performance dashboard (multiple charts)
+- Employee performance ranking (horizontal bar)
+
+### Combined Analysis
+- Sales by employee department
+- Regional hiring patterns
+- Department revenue contribution

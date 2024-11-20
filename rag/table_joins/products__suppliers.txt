@@ -1,0 +1,37 @@
+# Products - Suppliers Join
+
+## Join Relationship
+**products.supplier_id = suppliers.id**
+
+## Join Type
+Many-to-One (Many products can come from one supplier)
+
+## Join Purpose
+Link products to their suppliers for supply chain analysis and vendor management.
+
+## Common Join Queries
+```sql
+-- Products with supplier information
+SELECT p.name as product, p.category, p.selling_price, s.name as supplier, s.country, s.rating
+FROM products p
+JOIN suppliers s ON p.supplier_id = s.id
+
+-- Supplier product catalog and performance
+SELECT s.name as supplier, COUNT(p.id) as product_count, AVG(p.selling_price) as avg_product_price, s.rating
+FROM suppliers s
+LEFT JOIN products p ON s.id = p.supplier_id
+GROUP BY s.id, s.name
+
+-- Cost analysis by supplier
+SELECT s.name as supplier, SUM(p.cost_price * p.stock_quantity) as total_inventory_cost
+FROM suppliers s
+JOIN products p ON s.id = p.supplier_id
+GROUP BY s.id, s.name
+```
+
+## Key Insights Available
+- Supplier diversity by product category
+- Cost analysis by supplier
+- Supplier performance vs product pricing
+- Geographic supplier distribution
+- Inventory value by supplier

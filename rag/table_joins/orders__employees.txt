@@ -1,0 +1,43 @@
+# Orders - Employees Join
+
+## Join Relationship
+**orders.employee_id = employees.id**
+
+## Join Type
+Many-to-One (Many orders can be handled by one employee)
+
+## Join Purpose
+Track which sales representatives handle which orders for performance analysis.
+
+## Common Join Queries
+```sql
+-- Orders with sales representative information
+SELECT o.id as order_id, o.order_date, o.total_amount, e.name as sales_rep, 
+       e.position, d.name as department
+FROM orders o
+JOIN employees e ON o.employee_id = e.id
+JOIN departments d ON e.department_id = d.id
+
+-- Sales rep performance analysis
+SELECT e.name as sales_rep, COUNT(o.id) as orders_handled, 
+       SUM(o.total_amount) as total_sales, AVG(o.total_amount) as avg_order_size
+FROM employees e
+LEFT JOIN orders o ON e.id = o.employee_id
+WHERE e.department_id = (SELECT id FROM departments WHERE name = 'Sales')
+GROUP BY e.id, e.name
+
+-- Monthly sales performance by employee
+SELECT e.name as sales_rep, strftime('%Y-%m', o.order_date) as month,
+       COUNT(o.id) as orders, SUM(o.total_amount) as monthly_sales
+FROM employees e
+JOIN orders o ON e.id = o.employee_id
+GROUP BY e.id, e.name, strftime('%Y-%m', o.order_date)
+ORDER BY month, monthly_sales DESC
+```
+
+## Key Insights Available
+- Sales representative performance
+- Order handling workload distribution
+- Sales team productivity analysis
+- Commission calculation basis
+- Employee contribution to revenue

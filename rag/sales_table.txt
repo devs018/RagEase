@@ -1,0 +1,88 @@
+# Sales Table Documentation
+
+## Table: sales
+
+### Description  
+The sales table tracks all sales transactions with detailed information about products sold, amounts, dates, regions, and the responsible employees.
+
+### Schema Details
+- **id** (INTEGER PRIMARY KEY): Unique sale transaction identifier
+- **employee_id** (INTEGER): Foreign key linking to employees.id
+- **product** (TEXT): Product name from standard catalog
+- **amount** (REAL): Sale amount in USD, typically 100-5000 range
+- **sale_date** (DATE): Transaction date in YYYY-MM-DD format
+- **region** (TEXT): Geographic sales region
+
+### Valid Values
+**Regions:** North, South, East, West, Central
+**Products:** Laptop, Mouse, Keyboard, Monitor, Headphones, Tablet, Phone, Charger
+
+### Relationships
+- **employee_id** → employees.id (Many-to-One)
+- Each sale is attributed to exactly one employee
+- Employees can have multiple sales records
+
+### Advanced Query Patterns
+```sql
+-- Sales performance by employee
+SELECT 
+    e.name, 
+    e.department,
+    COUNT(s.id) as total_sales,
+    SUM(s.amount) as total_revenue,
+    AVG(s.amount) as avg_sale_amount
+FROM employees e 
+LEFT JOIN sales s ON e.id = s.employee_id 
+GROUP BY e.id, e.name, e.department
+ORDER BY total_revenue DESC;
+
+-- Regional performance analysis
+SELECT 
+    region,
+    COUNT(*) as sales_count,
+    SUM(amount) as total_revenue,
+    AVG(amount) as avg_sale_amount,
+    MIN(amount) as min_sale,
+    MAX(amount) as max_sale
+FROM sales 
+GROUP BY region
+ORDER BY total_revenue DESC;
+
+-- Product performance metrics
+SELECT 
+    product,
+    COUNT(*) as units_sold,
+    SUM(amount) as total_revenue,
+    AVG(amount) as avg_price,
+    COUNT(DISTINCT employee_id) as sellers_count
+FROM sales 
+GROUP BY product
+ORDER BY total_revenue DESC;
+
+-- Time series analysis
+SELECT 
+    strftime('%Y-%m', sale_date) as month,
+    COUNT(*) as sales_count,
+    SUM(amount) as monthly_revenue
+FROM sales 
+GROUP BY month 
+ORDER BY month;
+
+-- Top performers by region
+SELECT 
+    s.region,
+    e.name,
+    SUM(s.amount) as regional_sales
+FROM sales s
+JOIN employees e ON s.employee_id = e.id
+GROUP BY s.region, e.id, e.name
+ORDER BY s.region, regional_sales DESC;
+```
+
+### Analysis Opportunities
+- Sales trend analysis over time
+- Regional performance comparison
+- Product popularity and profitability
+- Employee performance evaluation
+- Seasonal patterns in sales data
+- Cross-selling analysis by employee/region

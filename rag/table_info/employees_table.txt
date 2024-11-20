@@ -1,0 +1,29 @@
+# Employees Table
+
+## Table: employees
+
+### Purpose
+Comprehensive employee information including personal details, job information, and organizational hierarchy.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique employee identifier
+- **name** (TEXT NOT NULL): Full employee name
+- **email** (TEXT UNIQUE): Company email address
+- **department_id** (INTEGER): Foreign key reference to departments.id
+- **position** (TEXT): Job title/position (Senior Developer, Marketing Manager, Sales Representative, etc.)
+- **salary** (REAL): Annual salary in USD ranging from $45,000 to $95,000
+- **hire_date** (DATE): Employee start date
+- **age** (INTEGER): Employee age (24-36 years)
+- **manager_id** (INTEGER): Foreign key reference to employees.id for direct manager
+- **phone** (TEXT): Contact phone number
+- **address** (TEXT): Home address
+
+### Key Information
+- 12 total employees across 7 departments
+- Hierarchical structure with managers and direct reports
+- Salary varies by position and department
+- Mix of senior and junior positions
+- Complete contact information for all employees
+
+### Sample Data Count
+12 employees with realistic job titles and compensation.

@@ -1,0 +1,74 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+wandb/
+mlruns/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+*.ipynb~
+
+# Byte-compiled and test artifacts
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Data files (optional, if datasets are huge)
+data/
+datasets/
+*.csv
+*.tsv
+*.parquet
+*.jsonl
+
+# Hugging Face & Transformers cache
+.cache/
+huggingface/
+~/.cache/huggingface/
+~/.huggingface/
+
+# Ollama models cache
+~/.ollama/
+
+# Checkpoints & models
+checkpoints/
+models/
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# Environment / secrets
+*.env
+secrets.json
+config.json
+
+# PyCharm & other editors
+*.iml
+*.idea/
+*.DS_Store

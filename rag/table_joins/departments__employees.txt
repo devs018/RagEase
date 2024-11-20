@@ -1,0 +1,36 @@
+# Departments - Employees Join
+
+## Join Relationship
+**departments.id = employees.department_id**
+
+## Join Type
+One-to-Many (One department can have many employees)
+
+## Join Purpose
+Link employees to their respective departments for organizational structure analysis.
+
+## Common Join Queries
+```sql
+-- Get employees with department information
+SELECT e.name, e.position, e.salary, d.name as department_name, d.location, d.budget
+FROM employees e
+JOIN departments d ON e.department_id = d.id
+
+-- Department headcount and average salary
+SELECT d.name as department, COUNT(e.id) as employee_count, AVG(e.salary) as avg_salary
+FROM departments d
+LEFT JOIN employees e ON d.id = e.department_id
+GROUP BY d.id, d.name
+
+-- Department managers
+SELECT d.name as department, mgr.name as manager_name, mgr.salary as manager_salary
+FROM departments d
+JOIN employees mgr ON d.manager_id = mgr.id
+```
+
+## Key Insights Available
+- Department workforce distribution
+- Salary analysis by department
+- Management hierarchy
+- Department budget vs employee costs
+- Geographic employee distribution

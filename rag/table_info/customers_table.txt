@@ -1,0 +1,30 @@
+# Customers Table
+
+## Table: customers
+
+### Purpose
+Information about customers who purchase products from the company.
+
+### Columns
+- **id** (INTEGER PRIMARY KEY): Unique customer identifier
+- **name** (TEXT NOT NULL): Customer name (company or individual)
+- **email** (TEXT UNIQUE): Customer email address
+- **phone** (TEXT): Contact phone number
+- **address** (TEXT): Customer address
+- **city** (TEXT): Customer city
+- **country** (TEXT): Customer country
+- **customer_type** (TEXT): Type of customer (Enterprise, SMB, Individual, Non-Profit)
+- **credit_limit** (REAL): Maximum credit limit in USD
+- **registration_date** (DATE): When customer account was created
+- **last_purchase_date** (DATE): Most recent purchase date
+
+### Key Information
+- 8 customers with diverse profiles
+- Mix of enterprise, small business, and individual customers
+- Credit limits range from $5,000 to $100,000
+- Customers located across different US cities
+- Active customer base with recent purchases
+- Different customer types for market segmentation
+
+### Sample Data Count
+8 customers representing different market segments and sizes.

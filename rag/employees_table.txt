@@ -1,0 +1,63 @@
+# Employee Table Documentation
+
+## Table: employees
+
+### Description
+The employees table stores comprehensive information about all company employees including personal details, department assignments, compensation, and employment history.
+
+### Schema Details
+- **id** (INTEGER PRIMARY KEY): Unique employee identifier, auto-generated
+- **name** (TEXT NOT NULL): Full employee name (First Last format)
+- **department** (TEXT): Employee department - valid values: Engineering, Marketing, Sales, HR
+- **salary** (REAL): Annual salary in USD, typically ranges from 50,000 to 100,000
+- **hire_date** (DATE): Employment start date in YYYY-MM-DD format
+- **age** (INTEGER): Employee age in years, typically 22-65 range
+
+### Business Rules
+- All employees must have a unique name
+- Salary must be positive and reasonable (25,000 - 200,000 range)
+- Hire date cannot be in the future
+- Age must be between 18 and 70
+- Department must match approved list
+
+### Common Query Patterns
+```sql
+-- Get all employees in a specific department
+SELECT * FROM employees WHERE department = 'Engineering';
+
+-- Calculate average salary by department
+SELECT department, AVG(salary) as avg_salary, COUNT(*) as employee_count 
+FROM employees GROUP BY department;
+
+-- Find employees hired in the last year
+SELECT * FROM employees WHERE hire_date >= date('now', '-1 year');
+
+-- Get salary statistics
+SELECT 
+    department,
+    MIN(salary) as min_salary,
+    AVG(salary) as avg_salary, 
+    MAX(salary) as max_salary,
+    COUNT(*) as employee_count
+FROM employees 
+GROUP BY department;
+
+-- Age distribution analysis
+SELECT 
+    CASE 
+        WHEN age < 30 THEN 'Under 30'
+        WHEN age < 40 THEN '30-39'
+        WHEN age < 50 THEN '40-49'
+        ELSE '50+'
+    END as age_group,
+    COUNT(*) as count
+FROM employees 
+GROUP BY age_group;
+```
+
+### Analysis Suggestions
+- Compare salary distributions across departments
+- Analyze hiring patterns over time
+- Examine correlation between age and salary
+- Department size and compensation analysis
+- Employee tenure calculations
